@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <title>My Pocket</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b0b12" />
+
+  <!-- iOS: install to home screen, full screen, no Safari chrome -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Pocket" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app">
+    <!-- HOME -->
+    <section class="page" data-page="home">
+      <header class="page-head">
+        <p class="greeting" id="greeting">Hello</p>
+        <h1>My Pocket</h1>
+      </header>
+
+      <div class="card balance-card">
+        <span class="label">Net balance</span>
+        <span class="balance" id="home-balance">$0.00</span>
+        <div class="balance-split">
+          <div><span class="dot in"></span>In <strong id="home-in">$0</strong></div>
+          <div><span class="dot out"></span>Out <strong id="home-out">$0</strong></div>
+        </div>
+      </div>
+
+      <div class="card stat-card">
+        <span class="label">Work</span>
+        <p class="stat" id="home-tasks">0 open tasks</p>
+        <p class="muted" id="home-done">0 done</p>
+      </div>
+    </section>
+
+    <!-- FINANCES -->
+    <section class="page" data-page="finances" hidden>
+      <header class="page-head"><h1>Finances</h1></header>
+
+      <div class="card balance-card">
+        <span class="label">Net balance</span>
+        <span class="balance" id="fin-balance">$0.00</span>
+      </div>
+
+      <form id="tx-form" class="row-form">
+        <div class="seg">
+          <button type="button" class="seg-btn active" data-type="out">Expense</button>
+          <button type="button" class="seg-btn" data-type="in">Income</button>
+        </div>
+        <input id="tx-label" type="text" placeholder="What for?" required />
+        <input id="tx-amount" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0.00" required />
+        <button type="submit" class="primary">Add</button>
+      </form>
+
+      <ul id="tx-list" class="list"></ul>
+      <p class="empty" id="tx-empty">No transactions yet. Add your first above.</p>
+    </section>
+
+    <!-- WORK -->
+    <section class="page" data-page="work" hidden>
+      <header class="page-head"><h1>Work</h1></header>
+
+      <form id="task-form" class="row-form">
+        <input id="task-label" type="text" placeholder="Add a task…" required />
+        <button type="submit" class="primary">Add</button>
+      </form>
+
+      <ul id="task-list" class="list"></ul>
+      <p class="empty" id="task-empty">Nothing here yet. Add a task above.</p>
+    </section>
+  </main>
+
+  <!-- TAB BAR -->
+  <nav class="tabbar">
+    <button class="tab active" data-go="home">
+      <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="tab" data-go="finances">
+      <svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M20 19H3"/></svg>
+      <span>Finances</span>
+    </button>
+    <button class="tab" data-go="work">
+      <svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg>
+      <span>Work</span>
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
